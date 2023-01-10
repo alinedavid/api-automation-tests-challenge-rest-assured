@@ -1,0 +1,1 @@
+{"uuid":"be88b198-0b88-45e8-8724-f66a759e2ac2","name":"patchBooking()","children":["8d56f528-f4ab-4ddd-8361-65da6573cf2c"],"befores":[{"name":"setRequest","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1673364300076,"stop":1673364300454}],"afters":[],"start":1673364299986,"stop":1673364303973}

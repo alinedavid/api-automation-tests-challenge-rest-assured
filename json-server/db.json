@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "email": "alinedavid.mel@gmail.com",
+      "password": "$2a$10$QfWA497NIw7lVOYN4CLTuOvkSGpv0vBrXXDNNA43X4/RFsH8jQFYS",
+      "id": 1
+    }
+  ],
+  "booking": {
+    "firstname": "Sally",
+    "lastname": "Brown",
+    "totalprice": 111,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2013-02-23",
+      "checkout": "2014-10-23"
+    },
+    "additionalneeds": "Breakfast"
+  }
+}

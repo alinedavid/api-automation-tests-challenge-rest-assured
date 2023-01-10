@@ -1,0 +1,1 @@
+{"uuid":"8de80d54-1d89-4f66-b839-ffb589496167","name":"ping()","children":["9f778ac7-b195-4049-a4bf-f845d0503ea2"],"befores":[{"name":"setRequest","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1673364852882,"stop":1673364852898}],"afters":[],"start":1673364852882,"stop":1673364853972}

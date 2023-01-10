@@ -1,0 +1,1 @@
+{"uuid":"d0785537-77ef-4f63-95cd-c75bab3e6746","name":"deleteBookingById_returnOk()","children":["8c2a2a89-4bf1-46ac-9e87-bd781373e690"],"befores":[{"name":"setRequest","status":"passed","stage":"finished","steps":[],"attachments":[],"parameters":[],"start":1673361719685,"stop":1673361720008}],"afters":[],"start":1673361719586,"stop":1673361850309}
