@@ -1,8 +1,11 @@
+package Entities;
+
 import Entities.Booking;
 import Entities.BookingDates;
 import Entities.User;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.filter.log.ErrorLoggingFilter;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -10,6 +13,9 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.*;
+
+import java.util.List;
+import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.LogConfig.logConfig;
@@ -46,7 +52,7 @@ public class BookingTests {
     void setRequest(){
         request = given().config(RestAssured.config().logConfig(logConfig().enableLoggingOfRequestAndResponseIfValidationFails()))
                 .contentType(ContentType.JSON)
-                .auth().basic("admin", "password123");
+                .auth().preemptive().basic("admin", "password123");
     }
 
     @Test
@@ -61,6 +67,28 @@ public class BookingTests {
 
         Assertions.assertNotNull(response);
         Assertions.assertEquals(200, response.statusCode());
+    }
+    @Test
+    public void deleteBookingById_returnOk(){
+            Response response = request
+                                    .when()
+                                        .delete("/booking/" + getId())
+                                    .then()
+                    .extract()
+                                        .response();
+
+
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(201, response.statusCode());
+    }
+
+    private String getId(){
+        List<BookingId> response = request
+                .when()
+                .get("/booking")
+                .as(new TypeRef<List<BookingId>>() {});
+        System.out.println(response.get(0).toString());
+        return response.get(0).getBookingid();
     }
 
     @Test
@@ -94,8 +122,60 @@ public class BookingTests {
                         .statusCode(200)
                         .contentType(ContentType.JSON).and().time(lessThan(2000L));
 
+    }
+    @Test
+    public void updateBooking(){
+        Response response = request
+                .when()
+                .body(booking)
+                .put("/booking/213")
+                .then()
+                .body(matchesJsonSchemaInClasspath("createBookingRequestSchema.json"))
+                .extract()
+                .response();
 
 
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(200, response.statusCode());
     }
 
+    @Test
+    public void patchBooking(){
+        Response response = request
+                .when()
+                .body(booking)
+                .patch("/booking/213")
+                .then()
+                .body(matchesJsonSchemaInClasspath("createBookingRequestSchema.json"))
+                .extract()
+                .response();
+
+
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(200, response.statusCode());
+    }
+    @Test
+    public void ping(){
+        Response response = request
+                .when()
+                .get()
+                .then()
+                .extract()
+                .response();
+
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(200, response.statusCode());
+    }
 }
+
+ class BookingId {
+    private String bookingid;
+
+     public String getBookingid() {
+         return bookingid;
+     }
+
+     public void setBookingid(String bookingid) {
+         this.bookingid = bookingid;
+     }
+ }
